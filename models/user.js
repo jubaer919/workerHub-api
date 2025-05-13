@@ -28,7 +28,7 @@ const userSchema = mongoose.Schema(
       default: null,
     },
     resetToken: String,
-    resetTokenExpiration: String,
+    resetTokenExpiration: Date,
   },
   { timestamps: true }
 );

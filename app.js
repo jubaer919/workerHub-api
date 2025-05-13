@@ -1,13 +1,17 @@
 const express = require("express");
 const cors = require("cors");
 const dotEnv = require("dotenv");
+const passport = require("passport");
 
 const getDB = require("./config/database");
 const authRoutes = require("./routes/authRoutes");
+require("./config/passport");
 
 dotEnv.config();
 
 const app = express();
+
+app.use(passport.initialize());
 
 app.use(
   cors({
