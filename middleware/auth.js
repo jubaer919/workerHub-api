@@ -1,7 +1,13 @@
 const jwt = require("jsonwebtoken");
 
 const isAuth = (req, res, next) => {
-  const token = req.get("Authorization").split(" ")[1];
+  const authHeader = req.get("Authorization");
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    const error = new Error("Not Authenticated");
+    error.statusCode = 401;
+    return next(error);
+  }
+  const token = authHeader.split(" ")[1];
   let decodeToken;
   try {
     decodeToken = jwt.verify(token, process.env.JWT_SECRET);

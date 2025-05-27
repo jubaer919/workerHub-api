@@ -5,6 +5,7 @@ const passport = require("passport");
 
 const getDB = require("./config/database");
 const authRoutes = require("./routes/authRoutes");
+const jobRoutes = require("./routes/jobRoutes");
 require("./config/passport");
 
 dotEnv.config();
@@ -23,6 +24,7 @@ app.use(
 app.use(express.json());
 
 app.use("/api", authRoutes);
+app.use("/jobs", jobRoutes);
 app.use((error, req, res, next) => {
   const status = error.statusCode || 500;
   const message = error.message || "Something went wrong in server";
