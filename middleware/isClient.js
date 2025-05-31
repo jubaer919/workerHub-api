@@ -25,3 +25,5 @@ const isClient = async (req, res, next) => {
     });
   }
 };
+
+module.exports = isClient;
