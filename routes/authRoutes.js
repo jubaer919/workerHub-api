@@ -3,6 +3,7 @@ const express = require("express");
 const authController = require("../controllers/authController");
 const isAuth = require("../middleware/auth");
 const passport = require("passport");
+const jwt = require("jsonwebtoken");
 
 const router = express.Router();
 
@@ -31,19 +32,11 @@ router.get(
     const token = jwt.sign(
       { email: req.user.email, userId: req.user._id.toString() },
       process.env.JWT_SECRET,
-      { expiresIn: "12h" }
+      { expiresIn: "15d" }
     );
 
-    res.status(200).json({
-      success: true,
-      token,
-      user: {
-        id: req.user._id,
-        name: req.user.name,
-        email: req.user.email,
-        role: req.user.role,
-      },
-    });
+    // Redirect to frontend with token
+    res.redirect(`http://localhost:5173/auth/google-success?token=${token}`);
   }
 );
 

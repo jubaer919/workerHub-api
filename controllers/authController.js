@@ -7,6 +7,7 @@ const resend = new Resend("re_7zbfpTCB_BCH5zHGbusN7a7TMCAkYTNTg");
 
 exports.registerUser = async (req, res, next) => {
   const { name, email, password } = req.body;
+  console.log("a request is receive");
 
   try {
     const user = await User.findOne({ email });
@@ -35,6 +36,7 @@ exports.registerUser = async (req, res, next) => {
 
 exports.loginUser = async (req, res, next) => {
   const { email, password } = req.body;
+  console.log("a request is resive in loginUser");
 
   try {
     const user = await User.findOne({ email });
@@ -57,7 +59,7 @@ exports.loginUser = async (req, res, next) => {
         userId: user._id.toString(),
       },
       process.env.JWT_SECRET,
-      { expiresIn: "12h" }
+      { expiresIn: "15d" }
     );
 
     const { _id, name, email: userEmail, role } = user;
