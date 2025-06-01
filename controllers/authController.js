@@ -7,7 +7,6 @@ const resend = new Resend("re_7zbfpTCB_BCH5zHGbusN7a7TMCAkYTNTg");
 
 exports.registerUser = async (req, res, next) => {
   const { name, email, password } = req.body;
-  console.log("a request is receive");
 
   try {
     const user = await User.findOne({ email });
@@ -36,7 +35,6 @@ exports.registerUser = async (req, res, next) => {
 
 exports.loginUser = async (req, res, next) => {
   const { email, password } = req.body;
-  console.log("a request is resive in loginUser");
 
   try {
     const user = await User.findOne({ email });
@@ -139,7 +137,7 @@ exports.resetPassword = async (req, res, next) => {
       subject: "Reset Password",
       html: `
         <center><strong>Reset password</strong></center>
-        <p>For Changing the password <a href='http://localhost:8080/auth/reset-password/${rawToken}' target='_blank'>Click</a> this link</p>
+        <p>For Changing the password <a href='http://localhost:5173/auth/reset-password/${rawToken}' target='_blank'>Click</a> this link</p>
       `,
     });
 
